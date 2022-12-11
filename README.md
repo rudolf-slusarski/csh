@@ -1,1 +1,1 @@
-# simple shell written in c
+# C shell

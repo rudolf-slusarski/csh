@@ -3,7 +3,18 @@
 
 #include "main.h"
 
-int main(int n, char **argv)
+int main(int ac, char **argv)
 {
+    char *prompt = "please do $ ";
+    char *lineptr;
+    size_t n = 0;
+
+    (void)ac; (void)argv;
+
+    printf("%s", prompt);
+    getline(&lineptr, &n, stdin);
+    printf("%s\n", lineptr);
+
+    free(lineptr);
     return 0;
 }

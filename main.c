@@ -8,7 +8,7 @@ int main(int ac, char **argv)
     char *prompt = "please do $ ";
     char *lineptr;
     size_t n = 0;
-    ssize_t nchars;
+    __ssize_t nchars;
 
     (void)ac;
     (void)argv;

@@ -57,8 +57,9 @@ int main(int ac, char **argv)
         }
 
         argv[i] = NULL;
-        printf("%s\n", lineptr);
+        execmd(argv);
     }
+    
     free(lineptr_copy);
     free(lineptr);
     return 0;

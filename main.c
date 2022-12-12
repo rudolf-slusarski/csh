@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "main.h"
 
 int main(int ac, char **argv)
 {
     char *prompt = "please do $ ";
-    char *lineptr = NULL;
+    char *lineptr = NULL, *lineptr_copy = NULL;
     size_t n = 0;
     __ssize_t nchars;
     const char *delim = " \n";
     (void)ac;
+    int num_tokens;
+    int i;
 
     while (1)
     {
-        int num_tokens;
-        int i = 0;
-        
+
         printf("%s", prompt);
         nchars = getline(&lineptr, &n, stdin);
 
@@ -27,15 +28,16 @@ int main(int ac, char **argv)
             return -1;
         }
 
-        char *lineptr_copy = malloc(sizeof(char) * nchars);
+        *lineptr_copy = malloc(sizeof(char) * nchars);
         if (lineptr_copy == NULL)
         {
             perror("memory allocation error");
             return -1;
         }
-        strcpy(lineptr_copy, lineptr);
-        char *tokens = strtok(lineptr, delim);
 
+        strcpy(lineptr_copy, lineptr);
+
+        char *tokens = strtok(lineptr, delim);
         while (tokens != NULL)
         {
             num_tokens++;
@@ -45,7 +47,8 @@ int main(int ac, char **argv)
 
         argv = malloc(sizeof(char *) * num_tokens);
         tokens = strtok(lineptr_copy, delim);
-        for (i; tokens != NULL; i++)
+
+        for (i = 0; tokens != NULL; i++)
         {
             argv[i] = malloc(sizeof(char) * strlen(tokens));
             strcpy(argv[i], tokens);
@@ -54,10 +57,9 @@ int main(int ac, char **argv)
         }
 
         argv[i] = NULL;
-
-        printf("%s", lineptr);
-        free(lineptr);
+        printf("%s\n", lineptr);
     }
-
+    free(lineptr_copy);
+    free(lineptr);
     return 0;
 }

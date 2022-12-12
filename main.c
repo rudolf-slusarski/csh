@@ -28,7 +28,7 @@ int main(int ac, char **argv)
             return -1;
         }
 
-        *lineptr_copy = malloc(sizeof(char) * nchars);
+        lineptr_copy = malloc(sizeof(char) * nchars);
         if (lineptr_copy == NULL)
         {
             perror("memory allocation error");

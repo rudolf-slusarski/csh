@@ -4,3 +4,4 @@
 #include <unistd.h>
 
 void execmd(char **argv);
+char *locate(char *command);

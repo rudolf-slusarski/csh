@@ -2,4 +2,4 @@
 if [ -f "csh" ]; then
     rm csh
 fi
-gcc -Wall -Wextra -Werror -pedantic main.c execmd.c -o csh
+gcc -Wall -Wextra -Werror -pedantic *.c -o csh
